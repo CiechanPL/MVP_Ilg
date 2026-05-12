@@ -203,7 +203,7 @@ body::after  { right: 0; }
       <div class="metric-card">
         <div class="label">Loan Amount (Repeat)</div>
         <div class="value">100&ndash;1,500</div>
-        <div class="note">S/ &middot; step TBD</div>
+        <div class="note">S/ &middot; step 50</div>
       </div>
       <div class="metric-card">
         <div class="label">Term</div>
@@ -212,8 +212,8 @@ body::after  { right: 0; }
       </div>
       <div class="metric-card">
         <div class="label">Interest</div>
-        <div class="value">7.3%</div>
-        <div class="note">monthly (87.6% p.a.)</div>
+        <div class="value">8.5%</div>
+        <div class="note">monthly (102% p.a.)</div>
       </div>
       <div class="metric-card">
         <div class="label">IGV</div>
@@ -223,9 +223,9 @@ body::after  { right: 0; }
     </div>
     <div class="card">
       <p><strong>Fee model:</strong> Tiered per loan sequence (see Section 3). On-time fee if paid by DPD 3; automatic surcharge after DPD 3 (see Section 4).</p>
-      <p><strong>Interest:</strong> 7.3% per month = 0.243% daily. Applied on principal for 30 days.</p>
+      <p><strong>Interest:</strong> 8.5% per month = 0.283% daily. Applied on principal for 30 days.</p>
       <p><strong>IGV (VAT):</strong> 18% levied on <strong>all revenue components</strong> (administration fee, surcharge, extension fee, penalty fees). Not part of APR/TCEA calculation.</p>
-      <p><strong>Interest during delay:</strong> After the due date, <strong>regular interest (7.3%/mo)</strong> and <strong>penalty interest (~1%/mo)</strong> accrue simultaneously on the outstanding principal. No additional interest is charged during an extension period.</p>
+      <p><strong>Interest during delay:</strong> After the due date, <strong>regular interest (8.5%/mo)</strong> and <strong>penalty interest (~1%/mo)</strong> accrue simultaneously on the outstanding principal. No additional interest is charged during an extension period.</p>
       <p><strong>Disbursement:</strong> Full principal disbursed to client&rsquo;s bank account (CCI). Fees collected at repayment.</p>
       <p><strong>Currency:</strong> PEN / Soles (S/)</p>
     </div>
@@ -415,7 +415,7 @@ body::after  { right: 0; }
 
     <div class="card">
       <h3 class="section-subtitle" style="margin-top:0;">Formulas</h3>
-      <p style="font-size:12px;"><strong>Interest</strong> = Principal &times; 7.3% / 30 &times; term days</p>
+      <p style="font-size:12px;"><strong>Interest</strong> = Principal &times; 8.5% / 30 &times; term days</p>
       <p style="font-size:12px;"><strong>Fee</strong> = Principal &times; tier fee %</p>
       <p style="font-size:12px;"><strong>IGV</strong> = 18% &times; (Interest + Fee) <em>&mdash; applied to all revenue components (admin fee, surcharge, extension fee, penalty fees, interest)</em></p>
       <p style="font-size:12px;"><strong>Total to repay</strong> = Principal + Interest + Fee + IGV</p>
@@ -438,12 +438,12 @@ body::after  { right: 0; }
         <tr class="row-label-blue"><td colspan="5">Loan breakdown</td></tr>
         <tr><td>Principal</td><td>200.00</td><td>200.00</td><td>200.00</td><td>200.00</td></tr>
         <tr><td>Fee (% of principal)</td><td>40.00 (20%)</td><td>70.00 (35%)</td><td>60.00 (30%)</td><td>52.00 (26%)</td></tr>
-        <tr><td>Interest (7.3%)</td><td>14.60</td><td>14.60</td><td>14.60</td><td>14.60</td></tr>
-        <tr><td>IGV 18%</td><td>9.83</td><td>15.23</td><td>13.43</td><td>11.99</td></tr>
+        <tr><td>Interest (8.5%)</td><td>17.00</td><td>17.00</td><td>17.00</td><td>17.00</td></tr>
+        <tr><td>IGV 18%</td><td>10.26</td><td>15.66</td><td>13.86</td><td>12.42</td></tr>
         <tr class="row-label-teal"><td colspan="5">Totals</td></tr>
-        <tr><td>Total to repay (on-time)</td><td class="td-highlight">264.43</td><td class="td-highlight">299.83</td><td class="td-highlight">288.03</td><td class="td-highlight">278.59</td></tr>
-        <tr><td>TCEM</td><td>27.30%</td><td>42.30%</td><td>37.30%</td><td>33.30%</td></tr>
-        <tr><td>TCEA</td><td>1,711%</td><td>6,793%</td><td>4,388%</td><td>3,048%</td></tr>
+        <tr><td>Total to repay (on-time)</td><td class="td-highlight">267.26</td><td class="td-highlight">302.66</td><td class="td-highlight">290.86</td><td class="td-highlight">281.42</td></tr>
+        <tr><td>TCEM</td><td>28.50%</td><td>43.50%</td><td>38.50%</td><td>34.50%</td></tr>
+        <tr><td>TCEA</td><td>1,927%</td><td>7,525%</td><td>4,882%</td><td>3,405%</td></tr>
       </tbody>
     </table>
 
@@ -771,7 +771,7 @@ body::after  { right: 0; }
     <table class="pricing-table">
       <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
       <tbody>
-        <tr><td>Loan amount</td><td>Slider</td><td>S/100 &ndash; S/200 (new), S/100 &ndash; S/1,500 (repeat), step S/10</td></tr>
+        <tr><td>Loan amount</td><td>Slider</td><td>S/100 &ndash; S/200 (new, step S/10), S/100 &ndash; S/1,500 (repeat, step S/50)</td></tr>
         <tr><td>Customer ID</td><td>Auto-generated</td><td>7-digit random unique ID</td></tr>
       </tbody>
     </table>
