@@ -108,6 +108,12 @@ body::after  { right: 0; }
 .step-card ul { margin: 8px 0 8px 20px; font-size: 12px; line-height: 1.7; }
 .step-card li { margin-bottom: 2px; }
 
+.screenshot-wrap { margin: 14px 0 4px; padding: 14px; background: #F9FAFB; border: 1px dashed #D1D5DB; border-radius: 10px; text-align: center; }
+.screenshot-wrap img { max-width: 320px; width: 100%; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.10); }
+.screenshot-wrap.wide img { max-width: 600px; }
+.screenshot-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #9CA3AF; margin-top: 8px; }
+.screenshot-label .nimbura-tag { display: inline-block; background: #EDE9FE; color: #5B21B6; font-size: 9px; padding: 1px 6px; border-radius: 3px; margin-left: 4px; }
+
 .toolbar { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 40px; margin: 0 12px; background: #FFFFFF; border-bottom: 1px solid #E5E7EB; }
 .btn { display: inline-block; padding: 8px 18px; border: none; border-radius: 6px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
 .btn-ghost { background: transparent; border: 1px solid #D1D5DB; color: #374151; }
@@ -487,6 +493,10 @@ body::after  { right: 0; }
         <li><strong>Expandable &ldquo;Details&rdquo;:</strong> Loan amount, Interest, Admin fee, IGV, Total, Due date, TCEA, TCEM.</li>
         <li><strong>Button:</strong> &ldquo;&iexcl;Quiero mi pr&eacute;stamo ya!&rdquo; &rarr; proceeds to Step 1.</li>
       </ul>
+      <div class="screenshot-wrap">
+        <img src="img/homepage.png" alt="Homepage — loan slider and T&C">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
+      </div>
     </div>
 
     <!-- STEP 1 -->
@@ -507,6 +517,10 @@ body::after  { right: 0; }
       <div class="callout-info callout" style="margin-top:8px;">
         <strong>Nimbura difference:</strong> ListoCredito adds Vehicle and Health insurance fields (not in Nimbura). Race/Ethnicity field from Nimbura is <strong>removed</strong> for Peru.
       </div>
+      <div class="screenshot-wrap">
+        <img src="img/step1_personal.png" alt="Step 1 — Personal Information">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
+      </div>
     </div>
 
     <!-- STEP 2 -->
@@ -522,6 +536,10 @@ body::after  { right: 0; }
         <li><strong>Full address</strong> &mdash; min 5 chars, letters + numbers required.</li>
         <li><strong>Duration at address</strong> &mdash; dropdown (0-6 months, 6m-1y, 1-5y, 5-20y, 20y+).</li>
       </ul>
+      <div class="screenshot-wrap">
+        <img src="img/step2_address.png" alt="Step 2 — Living Address">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
+      </div>
     </div>
 
     <!-- STEP 3 -->
@@ -559,6 +577,10 @@ body::after  { right: 0; }
       <ul>
         <li><strong>Monthly payments for active loans (balance with lenders)</strong> &mdash; dropdown (S/0, Up to S/500, S/501-1500, S/1501-3000, &gt;S/3000)</li>
       </ul>
+      <div class="screenshot-wrap wide">
+        <img src="img/step3_income.png" alt="Step 3 — Income & Payments">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
+      </div>
     </div>
 
     <!-- STEP 4 -->
@@ -572,6 +594,10 @@ body::after  { right: 0; }
         <li><strong>Contact person mobile</strong> &mdash; 9 digits, starts with 9. <strong>No OTP validation.</strong></li>
         <li><strong>Relationship</strong> &mdash; dropdown (Father/Mother, Brother/Sister, Partner, Son/Daughter, Uncle/Aunt, Friend, Neighbour, Co-worker, Other).</li>
       </ul>
+      <div class="screenshot-wrap">
+        <img src="img/step4_contact.png" alt="Step 4 — Alternative Contact Person">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
+      </div>
     </div>
 
     <!-- STEP 5 -->
@@ -589,6 +615,13 @@ body::after  { right: 0; }
         <li>If preliminary rules reject &rarr; rejection screen.</li>
         <li>If passed &rarr; proceeds to Step 6.</li>
       </ul>
+      <div class="screenshot-wrap">
+        <img src="img/step5_bank.png" alt="Step 5 — Bank Details" style="margin-bottom:10px;">
+      </div>
+      <div class="screenshot-wrap wide">
+        <img src="img/step5_processing.png" alt="Step 5 — Processing screens">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
+      </div>
     </div>
 
     <!-- STEP 6 -->
@@ -610,6 +643,16 @@ body::after  { right: 0; }
       </ul>
       <div class="callout callout" style="margin-top:8px;">
         <strong>RED FLAG (from RegForm Summary):</strong> Verification retry option &ldquo;currently not available but is a MUST.&rdquo; Client must be able to retry failed verification without restarting the entire flow.
+      </div>
+      <div class="screenshot-wrap">
+        <img src="img/step6_verify_prep.png" alt="Step 6 — Verify Identity preparation" style="margin-bottom:10px;">
+      </div>
+      <div class="screenshot-wrap wide">
+        <img src="img/step6_verify_progress.png" alt="Step 6 — Verification in progress / failed">
+      </div>
+      <div class="screenshot-wrap wide">
+        <img src="img/step6_verify_result.png" alt="Step 6 — Post-verification result">
+        <div class="screenshot-label">Design reference <span class="nimbura-tag">Nimbura</span> &mdash; content adapted for ListoCredito</div>
       </div>
     </div>
 
