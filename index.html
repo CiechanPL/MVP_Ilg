@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>listocredito.pe — MVP Business Requirements</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════
+   FURIA Design System — ListoCredito MVP Document
+   ═══════════════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #F3F4F6;
+  color: #2D2D3F;
+  font-size: 13px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before, body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  z-index: 9999;
+  background: linear-gradient(to bottom, #D91023 30%, #FFFFFF 30%, #FFFFFF 70%, #D91023 70%);
+}
+body::before { left: 0; }
+body::after  { right: 0; }
+
+.header {
+  background: #2D2D3F;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 12px;
+}
+.header-left h1 { font-size: 18px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.3px; margin-bottom: 4px; }
+.header-left .subtitle { font-size: 12px; font-weight: 400; color: #9CA3AF; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.header-badge { display: inline-block; background: linear-gradient(135deg, #D91023, #B91C1C); color: #fff; font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.header-version { color: #9CA3AF; font-size: 11px; }
+
+.content { max-width: 960px; margin: 0 auto; padding: 24px 40px 40px; }
+
+.section { margin-bottom: 28px; }
+.section-title { font-size: 16px; font-weight: 800; color: #2D2D3F; padding-bottom: 8px; border-bottom: 2px solid #D91023; margin-bottom: 16px; letter-spacing: 0.2px; }
+.section-subtitle { font-size: 14px; font-weight: 700; color: #374151; margin-bottom: 10px; margin-top: 16px; }
+
+.card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.card p { margin-bottom: 8px; }
+.card p:last-child { margin-bottom: 0; }
+
+.pricing-table { width: 100%; border-collapse: separate; border-spacing: 0; border: 1px solid #E5E7EB; border-radius: 8px; overflow: hidden; font-size: 13px; margin-bottom: 12px; font-variant-numeric: tabular-nums; }
+.pricing-table thead th { background: #374151; color: #FFFFFF; padding: 9px 14px; text-align: right; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; border-bottom: 2px solid #2D2D3F; }
+.pricing-table thead th:first-child { text-align: left; }
+.pricing-table tbody td { padding: 8px 14px; border-bottom: 1px solid #E5E7EB; text-align: right; font-size: 13px; }
+.pricing-table tbody td:first-child { text-align: left; font-weight: 500; color: #374151; }
+.pricing-table tbody tr:hover { background: #F9FAFB; }
+.pricing-table tbody tr:last-child td { border-bottom: none; }
+
+.th-highlight { background: linear-gradient(180deg, #C62828, #B91C1C, #8B1515) !important; font-size: 12px !important; letter-spacing: 0.5px; }
+.td-highlight { background: linear-gradient(90deg, rgba(185,28,28,0.12), rgba(185,28,28,0.05)); font-weight: 700; border-left: 2px solid rgba(185,28,28,0.25); }
+
+.row-label-blue td { background: linear-gradient(90deg, #EFF6FF, #F8FAFC) !important; font-weight: 700 !important; font-size: 11px !important; text-transform: uppercase; letter-spacing: 0.6px; color: #3B82F6 !important; border-bottom: 2px solid #BFDBFE !important; text-align: left !important; }
+.row-label-teal td { background: linear-gradient(90deg, #F0FDFA, #F8FAFC) !important; font-weight: 700 !important; font-size: 11px !important; text-transform: uppercase; letter-spacing: 0.6px; color: #0D9488 !important; border-bottom: 2px solid #99F6E4 !important; text-align: left !important; }
+.row-label-amber td { background: linear-gradient(90deg, #FFFBEB, #F8FAFC) !important; font-weight: 700 !important; font-size: 11px !important; text-transform: uppercase; letter-spacing: 0.6px; color: #D97706 !important; border-bottom: 2px solid #FDE68A !important; text-align: left !important; }
+
+.callout { border-left: 4px solid #D91023; background: #FEF2F2; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 12px; color: #7F1D1D; }
+.callout-info { border-left-color: #3B82F6; background: #EFF6FF; color: #1E3A5F; }
+.callout-warning { border-left-color: #F59E0B; background: #FFFBEB; color: #78350F; }
+.callout-green { border-left-color: #10B981; background: #ECFDF5; color: #065F46; }
+
+.placeholder { border: 2px dashed #D1D5DB; border-radius: 10px; padding: 24px; text-align: center; color: #9CA3AF; font-size: 13px; background: #FAFBFC; margin: 12px 0; }
+.placeholder strong { color: #6B7280; }
+
+.two-col { display: flex; gap: 20px; flex-wrap: wrap; }
+.two-col > .col { flex: 1; min-width: 280px; }
+
+.metric-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.metric-card { flex: 1; min-width: 120px; border: 1px solid #E5E7EB; border-radius: 10px; padding: 12px 16px; background: linear-gradient(180deg, #FFFFFF, #FAFAFA); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.metric-card .label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #6B7280; margin-bottom: 4px; }
+.metric-card .value { font-size: 20px; font-weight: 800; color: #B91C1C; }
+.metric-card .note { font-size: 10px; color: #9CA3AF; margin-top: 2px; }
+
+.tag { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.3px; }
+.tag-red   { background: #FEE2E2; color: #991B1B; }
+.tag-blue  { background: #DBEAFE; color: #1E40AF; }
+.tag-green { background: #D1FAE5; color: #065F46; }
+.tag-amber { background: #FEF3C7; color: #92400E; }
+.tag-purple { background: #EDE9FE; color: #5B21B6; }
+
+.toc { columns: 2; column-gap: 24px; font-size: 12px; margin-bottom: 8px; }
+.toc a { display: block; color: #374151; text-decoration: none; padding: 3px 0; border-bottom: 1px dotted #E5E7EB; }
+.toc a:hover { color: #D91023; }
+.toc .toc-num { display: inline-block; width: 22px; font-weight: 700; color: #B91C1C; }
+
+/* Journey step cards */
+.step-card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 10px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.04); border-left: 4px solid #3B82F6; }
+.step-card .step-num { display: inline-block; background: #3B82F6; color: #fff; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 4px; margin-bottom: 8px; }
+.step-card .step-title { font-size: 15px; font-weight: 700; color: #1E3A5F; margin-bottom: 8px; }
+.step-card ul { margin: 8px 0 8px 20px; font-size: 12px; line-height: 1.7; }
+.step-card li { margin-bottom: 2px; }
+
+.toolbar { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 40px; margin: 0 12px; background: #FFFFFF; border-bottom: 1px solid #E5E7EB; }
+.btn { display: inline-block; padding: 8px 18px; border: none; border-radius: 6px; font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.btn-ghost { background: transparent; border: 1px solid #D1D5DB; color: #374151; }
+.btn-ghost:hover { background: #F3F4F6; }
+
+.footer { border-top: 3px solid #D91023; padding: 12px 40px; background: #FFFFFF; display: flex; justify-content: space-between; font-size: 10px; color: #6B7280; margin: 0 12px; }
+
+@media print {
+  body { background: #fff; margin: 0; font-size: 11px; }
+  body::before, body::after { display: none; }
+  .toolbar { display: none !important; }
+  .header { margin: 0; break-after: avoid; }
+  .content { padding: 16px 24px; max-width: 100%; }
+  .footer { margin: 0; }
+  .section { break-inside: avoid; }
+  .pricing-table { break-inside: avoid; }
+  .card { break-inside: avoid; box-shadow: none; }
+  .step-card { break-inside: avoid; box-shadow: none; }
+  .placeholder { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
+  .metric-card { box-shadow: none; }
+  @page { margin: 12mm 10mm; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════ HEADER ════════════════════════════════════════════════════ -->
+<header class="header">
+  <div class="header-left">
+    <h1>listocredito.pe &mdash; MVP Business Requirements</h1>
+    <div class="subtitle">Product configuration &amp; customer journey &middot; Nimbura-adapted flow</div>
+  </div>
+  <div class="header-right">
+    <span class="header-badge">listocredito.pe</span>
+    <span class="header-version">v2.0 &middot; 2026-05-11</span>
+  </div>
+</header>
+
+<div class="toolbar">
+  <button class="btn btn-ghost" onclick="window.print()">Export to PDF</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════ CONTENT ════════════════════════════════════════════════════ -->
+<main class="content">
+
+  <!-- ─── TOC ─────────────────────────────────────── -->
+  <div class="section">
+    <h2 class="section-title">Table of Contents</h2>
+    <div class="toc">
+      <a href="#s1"><span class="toc-num">1</span> Project Overview</a>
+      <a href="#s2"><span class="toc-num">2</span> Key Parameters</a>
+      <a href="#s3"><span class="toc-num">3</span> Tiered Fee Schedule</a>
+      <a href="#s4"><span class="toc-num">4</span> Reversed-Penalty Pricing</a>
+      <a href="#s5"><span class="toc-num">5</span> Extension Pricing</a>
+      <a href="#s6"><span class="toc-num">6</span> Calculator &amp; TCEA / TCEM</a>
+      <a href="#s7"><span class="toc-num">7</span> Customer Journey (6-Step Flow)</a>
+      <a href="#s8"><span class="toc-num">8</span> Customer Fields &amp; Validations</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 1. PROJECT OVERVIEW ═══════════════════════════════════════════════ -->
+  <div class="section" id="s1">
+    <h2 class="section-title">1. Project Overview</h2>
+    <div class="card">
+      <p><strong>Brand:</strong> ListoCredito! (listocredito.pe)</p>
+      <p><strong>Legal entity (PE):</strong> MD FINANCE PERU S.A.C. &middot; RUC 20614490994</p>
+      <p><strong>HQ:</strong> CREAM HUB SIA &middot; Reg. 40203538116 &middot; Riga, Latvia</p>
+      <p><strong>Product:</strong> Payday loan (PDL) &middot; 30-day term &middot; 1 installment &middot; Unsecured &middot; SOL (S/)</p>
+      <p><strong>IT Platform:</strong> InGain LMS (current) &mdash; white-label website, registration flow, calculator, client cabinet</p>
+      <p><strong>Scope:</strong> Tiered pricing model with reversed-penalty mechanism, applied per loan sequence. Registration flow adapted from Nimbura 6-step structure.</p>
+    </div>
+    <div class="callout-info callout">
+      <strong>Design directive:</strong> Copy Nimbura&rsquo;s design with progress bar across all registration steps. T&amp;C and consents are moved to the Homepage (first page), following the Nimbura approach.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 2. KEY PARAMETERS ═══════════════════════════════════════════════ -->
+  <div class="section" id="s2">
+    <h2 class="section-title">2. Key Parameters</h2>
+    <div class="metric-row">
+      <div class="metric-card">
+        <div class="label">Loan Amount (New)</div>
+        <div class="value">100&ndash;200</div>
+        <div class="note">S/ &middot; step 10</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Loan Amount (Repeat)</div>
+        <div class="value">100&ndash;1,500</div>
+        <div class="note">S/ &middot; step TBD</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Term</div>
+        <div class="value">30 d</div>
+        <div class="note">fixed</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Interest</div>
+        <div class="value">7.3%</div>
+        <div class="note">monthly (87.6% p.a.)</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">IGV</div>
+        <div class="value">18%</div>
+        <div class="note">on all fees</div>
+      </div>
+    </div>
+    <div class="card">
+      <p><strong>Fee model:</strong> Tiered per loan sequence (see Section 3). On-time fee if paid by DPD 3; automatic surcharge after DPD 3 (see Section 4).</p>
+      <p><strong>Interest:</strong> 7.3% per month = 0.243% daily. Applied on principal for 30 days.</p>
+      <p><strong>IGV (VAT):</strong> 18% levied on <strong>all revenue components</strong> (administration fee, surcharge, extension fee, penalty fees). Not part of APR/TCEA calculation.</p>
+      <p><strong>Interest during delay:</strong> After the due date, <strong>regular interest (7.3%/mo)</strong> and <strong>penalty interest (~1%/mo)</strong> accrue simultaneously on the outstanding principal. No additional interest is charged during an extension period.</p>
+      <p><strong>Disbursement:</strong> Full principal disbursed to client&rsquo;s bank account (CCI). Fees collected at repayment.</p>
+      <p><strong>Currency:</strong> PEN / Soles (S/)</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 3. TIERED FEE SCHEDULE ═══════════════════════════════════════════════ -->
+  <div class="section" id="s3">
+    <h2 class="section-title">3. Tiered Fee Schedule</h2>
+
+    <div class="card">
+      <p>Each loan sequence pays a different <strong>on-time management fee</strong> (% of principal). The customer always sees two prices: a lower &ldquo;on-time&rdquo; price and a higher &ldquo;late&rdquo; price.</p>
+    </div>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Sequences</th>
+          <th class="th-highlight">On-time fee</th>
+          <th>Late surcharge</th>
+          <th>Extension 30d</th>
+          <th>Extension 14d</th>
+          <th>Extension 7d</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tier 1 &mdash; First loan</td>
+          <td>1</td>
+          <td class="td-highlight">20%</td>
+          <td>40%</td>
+          <td>30%</td>
+          <td>19%</td>
+          <td>12%</td>
+        </tr>
+        <tr>
+          <td>Tier 2 &mdash; Fresh</td>
+          <td>2&ndash;4</td>
+          <td class="td-highlight">35%</td>
+          <td>40%</td>
+          <td>30%</td>
+          <td>19%</td>
+          <td>12%</td>
+        </tr>
+        <tr>
+          <td>Tier 3 &mdash; Established</td>
+          <td>5&ndash;9</td>
+          <td class="td-highlight">30%</td>
+          <td>40%</td>
+          <td>30%</td>
+          <td>19%</td>
+          <td>12%</td>
+        </tr>
+        <tr>
+          <td>Tier 4 &mdash; Loyal</td>
+          <td>10+</td>
+          <td class="td-highlight">26%</td>
+          <td>35%</td>
+          <td>30%</td>
+          <td>19%</td>
+          <td>12%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout-info callout">
+      <strong>All percentages are of principal.</strong> All fees (administration fee, surcharge, extension fees) are subject to 18% IGV.
+    </div>
+
+    <h3 class="section-subtitle">Example: On-time fee amounts by principal</h3>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Principal (S/)</th>
+          <th>Tier 1 (20%)</th>
+          <th>Fresh (35%)</th>
+          <th>Tier 3 (30%)</th>
+          <th>Tier 4 (26%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>100</td><td>20</td><td>35</td><td>30</td><td>26</td></tr>
+        <tr><td>150</td><td>30</td><td>53</td><td>45</td><td>39</td></tr>
+        <tr><td>200</td><td>40</td><td>70</td><td>60</td><td>52</td></tr>
+        <tr><td>300</td><td>60</td><td>105</td><td>90</td><td>78</td></tr>
+        <tr><td>500</td><td>100</td><td>175</td><td>150</td><td>130</td></tr>
+        <tr><td>700</td><td>140</td><td>245</td><td>210</td><td>182</td></tr>
+        <tr><td>1,000</td><td>200</td><td>350</td><td>300</td><td>260</td></tr>
+        <tr><td>1,500</td><td>300</td><td>525</td><td>450</td><td>390</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 4. REVERSED-PENALTY PRICING ═══════════════════════════════════════════════ -->
+  <div class="section" id="s4">
+    <h2 class="section-title">4. Reversed-Penalty Pricing</h2>
+
+    <div class="card">
+      <h3 class="section-subtitle" style="margin-top:0;">How it works</h3>
+      <p>The customer sees <strong>two prices tied to two dates</strong>:</p>
+      <ul style="margin:8px 0 8px 20px;font-size:12px;line-height:1.8;">
+        <li>&ldquo;If you repay by <strong>[due date + 3 days]</strong>, your administration fee is <strong>X</strong>.&rdquo;</li>
+        <li>&ldquo;If you plan to repay after that date, the price is <strong>Y</strong>.&rdquo;</li>
+      </ul>
+      <p style="font-size:12px;">The higher price applies automatically from DPD 4 onward (a one-time surcharge added to the administration fee). If the customer takes an extension, the surcharge is cancelled &mdash; even if already triggered. Once an extension is purchased, the surcharge does not re-apply for the remainder of that loan.</p>
+    </div>
+
+    <div class="callout-green callout">
+      <strong>Example &mdash; Maria, Seq 2 (Fresh), S/300, due 23 June:</strong><br>
+      Admin fee (35%) = S/105. Surcharge (40%) = S/120. She sees:<br>
+      &ldquo;Repay by 26 June: administration fee S/105&rdquo; / &ldquo;Repay after 26 June: administration fee S/225&rdquo;<br>
+      <br>
+      &bull; Pays 22 June (before due): admin fee <strong>S/105</strong>. Done.<br>
+      &bull; Pays 25 June (3 days after due): admin fee <strong>S/105</strong>. Done.<br>
+      &bull; Pays 27 June (4 days after due): admin fee <strong>S/225</strong>. Surcharge added automatically on day 4.<br>
+      &bull; Extension on 22 June: pays <strong>S/90</strong> ext fee. No surcharge. New due: 23 July.<br>
+      &bull; Extension on 27 June: pays <strong>S/90</strong> ext fee. Surcharge <strong>cancelled</strong>.
+    </div>
+
+    <h3 class="section-subtitle">Configurable settings</h3>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Setting</th>
+          <th>Default for ListoCredito</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>On-time fee % per sequence</td><td>Seq 1 = 20%, 2-4 = 35%, 5-9 = 30%, 10+ = 26%</td></tr>
+        <tr><td>Surcharge % per sequence (of principal)</td><td>Seq 1 = 40%, 2-4 = 40%, 5-9 = 40%, 10+ = 35%</td></tr>
+        <tr><td>Grace period (days after due date)</td><td>3 days</td></tr>
+        <tr><td>Extension ratios (% of principal)</td><td>30d = 30% / 14d = 19% / 7d = 12%</td></tr>
+        <tr><td>Max DPD for extensions</td><td>20</td></tr>
+        <tr><td>After grace period: only 30-day ext.</td><td>After DPD 3, only the 30-day extension is available</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 5. EXTENSION PRICING ═══════════════════════════════════════════════ -->
+  <div class="section" id="s5">
+    <h2 class="section-title">5. Extension Pricing</h2>
+
+    <div class="card" style="margin-bottom:16px;">
+      <p>Extensions are priced as a <strong>percentage of principal</strong>, scaling automatically across all tiers. Subject to <strong>18% IGV</strong>.</p>
+      <ul style="margin:8px 0 8px 20px;font-size:12px;">
+        <li><strong>30-day extension:</strong> 30% of principal</li>
+        <li><strong>14-day extension:</strong> 19% of principal</li>
+        <li><strong>7-day extension:</strong> 12% of principal</li>
+      </ul>
+      <p style="font-size:12px;color:#6B7280;">Extension adds days to the <strong>original due date</strong>, not from the date the extension is taken. Extension application valid for 3 days. Taking an extension cancels any triggered surcharge.</p>
+    </div>
+
+    <h3 class="section-subtitle">Extension fee amounts by principal (excl. IGV)</h3>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Principal (S/)</th>
+          <th class="th-highlight">30d (30%)</th>
+          <th>14d (19%)</th>
+          <th>7d (12%)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>100</td><td class="td-highlight">30</td><td>19</td><td>12</td></tr>
+        <tr><td>150</td><td class="td-highlight">45</td><td>29</td><td>18</td></tr>
+        <tr><td>200</td><td class="td-highlight">60</td><td>38</td><td>24</td></tr>
+        <tr><td>300</td><td class="td-highlight">90</td><td>57</td><td>36</td></tr>
+        <tr><td>500</td><td class="td-highlight">150</td><td>95</td><td>60</td></tr>
+        <tr><td>700</td><td class="td-highlight">210</td><td>133</td><td>84</td></tr>
+        <tr><td>1,000</td><td class="td-highlight">300</td><td>190</td><td>120</td></tr>
+        <tr><td>1,500</td><td class="td-highlight">450</td><td>285</td><td>180</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout-info callout">
+      <strong>IGV example (S/300, 30d extension):</strong> Fee = S/90, IGV = S/16.20, Total extension cost = <strong>S/106.20</strong>.
+    </div>
+
+    <div class="callout-warning callout">
+      <strong>After grace period (DPD &gt; 3):</strong> Only the <strong>30-day extension</strong> is available. The 14-day and 7-day options are disabled. No additional interest is charged during the extension period.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 6. CALCULATOR & TCEA/TCEM ═══════════════════════════════════════════════ -->
+  <div class="section" id="s6">
+    <h2 class="section-title">6. Calculator &amp; TCEA / TCEM</h2>
+
+    <div class="card">
+      <h3 class="section-subtitle" style="margin-top:0;">Formulas</h3>
+      <p style="font-size:12px;"><strong>Interest</strong> = Principal &times; 7.3% / 30 &times; term days</p>
+      <p style="font-size:12px;"><strong>Fee</strong> = Principal &times; tier fee %</p>
+      <p style="font-size:12px;"><strong>IGV</strong> = 18% &times; (Interest + Fee) <em>&mdash; applied to all revenue components (admin fee, surcharge, extension fee, penalty fees, interest)</em></p>
+      <p style="font-size:12px;"><strong>Total to repay</strong> = Principal + Interest + Fee + IGV</p>
+      <p style="font-size:12px;"><strong>TCEM</strong> = (Principal + Interest + Fee) / Principal &minus; 1 <em>(excludes IGV)</em></p>
+      <p style="font-size:12px;"><strong>TCEA</strong> = (1 + TCEM)<sup>12</sup> &minus; 1</p>
+    </div>
+
+    <h3 class="section-subtitle">Example calculations &mdash; S/200 loan, 30 days</h3>
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Tier 1 (Seq 1)</th>
+          <th>Fresh (Seq 2-4)</th>
+          <th>Tier 3 (Seq 5-9)</th>
+          <th>Tier 4 (Seq 10+)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-label-blue"><td colspan="5">Loan breakdown</td></tr>
+        <tr><td>Principal</td><td>200.00</td><td>200.00</td><td>200.00</td><td>200.00</td></tr>
+        <tr><td>Fee (% of principal)</td><td>40.00 (20%)</td><td>70.00 (35%)</td><td>60.00 (30%)</td><td>52.00 (26%)</td></tr>
+        <tr><td>Interest (7.3%)</td><td>14.60</td><td>14.60</td><td>14.60</td><td>14.60</td></tr>
+        <tr><td>IGV 18%</td><td>9.83</td><td>15.23</td><td>13.43</td><td>11.99</td></tr>
+        <tr class="row-label-teal"><td colspan="5">Totals</td></tr>
+        <tr><td>Total to repay (on-time)</td><td class="td-highlight">264.43</td><td class="td-highlight">299.83</td><td class="td-highlight">288.03</td><td class="td-highlight">278.59</td></tr>
+        <tr><td>TCEM</td><td>27.30%</td><td>42.30%</td><td>37.30%</td><td>33.30%</td></tr>
+        <tr><td>TCEA</td><td>1,711%</td><td>6,793%</td><td>4,388%</td><td>3,048%</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">What appears on the slider / in the customer cabinet</h3>
+    <div class="card">
+      <ul style="margin:4px 0 4px 20px;font-size:12px;line-height:1.8;">
+        <li><strong>Due date</strong> &mdash; calculated as TODAY + 30 calendar days</li>
+        <li><strong>Repay by [due date + 3 days]:</strong> total with on-time administration fee</li>
+        <li><strong>Repay after [due date + 3 days]:</strong> total with higher administration fee</li>
+        <li><strong>Expandable &ldquo;Details&rdquo; section:</strong> Loan amount, Interest, Administration fee, IGV, TCEA, TCEM</li>
+      </ul>
+    </div>
+
+    <div class="callout-info callout">
+      <strong>Slider configuration (new clients):</strong> Range S/100 &ndash; S/200, step S/10, default S/200. Term is fixed at 30 days (not shown as a slider due to Google Ads restrictions on loans &lt; 60 days).
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 7. CUSTOMER JOURNEY ═══════════════════════════════════════════════ -->
+  <div class="section" id="s7">
+    <h2 class="section-title">7. Customer Journey (6-Step Flow)</h2>
+
+    <div class="card" style="margin-bottom:16px;">
+      <p style="font-size:12px;"><strong>Source:</strong> RegForm Summary (binding process). Design: copy Nimbura with progress bar. Auth: phone + 4-digit OTP (no password). T&amp;C moved to Homepage.</p>
+      <p style="font-size:12px;"><strong>Progress bar stages:</strong> 1. Personal Information &rarr; 2. Address &rarr; 3. Income &amp; Payments &rarr; 4. Contact Person &rarr; 5. Bank Details &rarr; 6. Verification</p>
+    </div>
+
+    <!-- HOMEPAGE -->
+    <div class="step-card" style="border-left-color:#D91023;">
+      <span class="step-num" style="background:#D91023;">HOMEPAGE</span>
+      <div class="step-title">Loan Calculator &amp; Initial Application</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> Customer opens listocredito.pe</p>
+      <ul>
+        <li><strong>Loan Amount Slider:</strong> S/100 &ndash; S/200, step S/10. Default S/200. No manual input &mdash; slider only.</li>
+        <li><strong>Term:</strong> Fixed 30 days (not displayed as slider). Due date shown below.</li>
+        <li><strong>Phone number field:</strong> Peruvian mobile (+51), starts with 9, 9 digits total.</li>
+        <li><strong>4-digit OTP verification</strong> via SMS (provider: Yautalk).</li>
+        <li><strong>T&amp;C and Consents</strong> (checkboxes, moved here from later steps):
+          <ul>
+            <li>Privacy Policy (mandatory, with link)</li>
+            <li>Terms &amp; Conditions (mandatory, with link)</li>
+            <li>Not a PEP declaration (mandatory)</li>
+            <li>Not a PEP family member (mandatory)</li>
+            <li>Marketing consent (optional)</li>
+          </ul>
+        </li>
+        <li><strong>Expandable &ldquo;Details&rdquo;:</strong> Loan amount, Interest, Admin fee, IGV, Total, Due date, TCEA, TCEM.</li>
+        <li><strong>Button:</strong> &ldquo;&iexcl;Quiero mi pr&eacute;stamo ya!&rdquo; &rarr; proceeds to Step 1.</li>
+      </ul>
+    </div>
+
+    <!-- STEP 1 -->
+    <div class="step-card">
+      <span class="step-num">STEP 1 / 6</span>
+      <div class="step-title">Personal Information</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> OTP verified, consents accepted.</p>
+      <ul>
+        <li><strong>Personal ID (DNI)</strong> &mdash; 8 digits, no checksum. Primary identifier.</li>
+        <li><strong>Email address</strong> &mdash; standard email validation (@ + domain).</li>
+        <li><strong>Name &amp; Surname</strong> &mdash; obtained from ID-doc via OCR (e-KYC step), not client input. Displayed read-only after verification.</li>
+        <li><strong>Marital status</strong> &mdash; dropdown (Single, Married, Cohabiting, Divorced, Widowed).</li>
+        <li><strong>Education level</strong> &mdash; dropdown (9 options, from &ldquo;No formal education&rdquo; to &ldquo;Completed university&rdquo;).</li>
+        <li><strong>Type of vehicle</strong> &mdash; dropdown (No, Motorcycle, Car, Both). <span class="tag tag-blue">LC only</span></li>
+        <li><strong>Health insurance</strong> &mdash; dropdown (None, SIS, EsSalud, EPS, Don&rsquo;t know). <span class="tag tag-blue">LC only</span></li>
+        <li><strong>Main reason for loan</strong> &mdash; dropdown (12 options).</li>
+      </ul>
+      <div class="callout-info callout" style="margin-top:8px;">
+        <strong>Nimbura difference:</strong> ListoCredito adds Vehicle and Health insurance fields (not in Nimbura). Race/Ethnicity field from Nimbura is <strong>removed</strong> for Peru.
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-card">
+      <span class="step-num">STEP 2 / 6</span>
+      <div class="step-title">Living Address</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> Step 1 completed.</p>
+      <ul>
+        <li><strong>Department</strong> &mdash; dropdown (25 departments).</li>
+        <li><strong>Province</strong> &mdash; cascading dropdown (196 provinces, filtered by department).</li>
+        <li><strong>District</strong> &mdash; cascading dropdown (1,837 districts, filtered by province).</li>
+        <li><strong>City</strong> &mdash; min 3 chars, letters only, special chars allowed (&ntilde;, &aacute;, &eacute;, &iacute;, &oacute;, &uacute;, &uuml;).</li>
+        <li><strong>Full address</strong> &mdash; min 5 chars, letters + numbers required.</li>
+        <li><strong>Duration at address</strong> &mdash; dropdown (0-6 months, 6m-1y, 1-5y, 5-20y, 20y+).</li>
+      </ul>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-card">
+      <span class="step-num">STEP 3 / 6</span>
+      <div class="step-title">Income &amp; Payments</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> Step 2 completed. Simplified &mdash; client chooses Employed / Self-employed / Other, then conditional fields appear.</p>
+      <ul>
+        <li><strong>Employment status</strong> &mdash; radio buttons (Employee, Self-employed, Other).</li>
+      </ul>
+      <p style="font-size:12px;margin:6px 0 4px;"><strong>If Employee:</strong></p>
+      <ul>
+        <li>Salary range &mdash; dropdown (6 ranges: &lt;S/1,000 to S/8,000+)</li>
+        <li>Salary payment date &mdash; dropdown (End of month, Biweekly, Weekly, Other)</li>
+        <li>Employer company name &mdash; free text, min 3 chars</li>
+        <li>Company phone &mdash; +51 auto-prefix, landline or mobile validation</li>
+        <li>Sphere of business &mdash; dropdown (16 sectors). <span class="tag tag-blue">LC only</span></li>
+        <li>Job title &mdash; dropdown (9 positions)</li>
+        <li>Employment period &mdash; dropdown (6 ranges)</li>
+      </ul>
+      <p style="font-size:12px;margin:6px 0 4px;"><strong>If Self-employed:</strong></p>
+      <ul>
+        <li>Position / Type of work &mdash; free text, min 3 chars, letters only</li>
+        <li>Monthly net income &mdash; dropdown (same 6 ranges)</li>
+        <li>Business name &mdash; free text, min 3 chars</li>
+        <li>Sphere of business &mdash; dropdown (same 16 sectors)</li>
+        <li>Self-employed period &mdash; dropdown (same 6 ranges)</li>
+      </ul>
+      <p style="font-size:12px;margin:6px 0 4px;"><strong>If Other:</strong></p>
+      <ul>
+        <li>Source of income &mdash; dropdown (Rentals, Investments, Pension, Remittances, Freelancer, Sale of goods, Other)</li>
+        <li>Monthly net income &mdash; dropdown</li>
+        <li>Frequency / income duration &mdash; dropdown (Monthly, Biweekly, Weekly, Occasional, One-time, Other)</li>
+      </ul>
+      <ul>
+        <li><strong>Monthly payments for active loans (balance with lenders)</strong> &mdash; dropdown (S/0, Up to S/500, S/501-1500, S/1501-3000, &gt;S/3000)</li>
+      </ul>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-card">
+      <span class="step-num">STEP 4 / 6</span>
+      <div class="step-title">Alternative Contact Person</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> Step 3 completed. Reference contact in case applicant is unreachable.</p>
+      <ul>
+        <li><strong>Phone ownership</strong> &mdash; radio buttons (In my name, Partner, Parent, Sibling, Employer, Other). Mandatory.</li>
+        <li><strong>Contact person full name</strong> &mdash; min 5 chars, 2 words required, no digits.</li>
+        <li><strong>Contact person mobile</strong> &mdash; 9 digits, starts with 9. <strong>No OTP validation.</strong></li>
+        <li><strong>Relationship</strong> &mdash; dropdown (Father/Mother, Brother/Sister, Partner, Son/Daughter, Uncle/Aunt, Friend, Neighbour, Co-worker, Other).</li>
+      </ul>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-card">
+      <span class="step-num">STEP 5 / 6</span>
+      <div class="step-title">Bank Details &amp; Processing</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> Step 4 completed.</p>
+      <ul>
+        <li><strong>Bank name</strong> &mdash; dropdown (BCP, Interbank, Scotiabank, BBVA, Pichincha, MiBanco, Other).</li>
+        <li><strong>Bank CCI (account number)</strong> &mdash; 20 digits, checksum validation required. Accepts formats: xxx-xxx-xxxxxxxxxxxx-xx, plain 20 digits, with or without separators.</li>
+      </ul>
+      <p style="font-size:12px;margin-top:10px;"><strong>Processing screen</strong> (same step, no client action required):</p>
+      <ul>
+        <li>Visual progress tracker showing: Validating contact info &rarr; Creating account &rarr; Validating address &rarr; Analyzing income &rarr; Running preliminary assessment.</li>
+        <li>If preliminary rules reject &rarr; rejection screen.</li>
+        <li>If passed &rarr; proceeds to Step 6.</li>
+      </ul>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step-card" style="border-left-color:#10B981;">
+      <span class="step-num" style="background:#10B981;">STEP 6 / 6</span>
+      <div class="step-title">Verification (e-KYC)</div>
+      <p style="font-size:12px;margin-bottom:8px;"><strong>Trigger:</strong> Step 5 processing passed. Provider: Truora.</p>
+      <ul>
+        <li><strong>Preparation screen:</strong> instructions (have ID ready, good lighting, working camera, stable internet).</li>
+        <li><strong>Verification process:</strong> embedded Truora flow &mdash; facial matching (selfie vs. ID), document authentication, OCR extraction (DOB, gender, name, ID number), cross-check against government registries.</li>
+        <li><strong>Post-verification processing:</strong> final assessment with real-time API calls (Equifax/Infocorp, scoring). Up to 120 seconds.</li>
+        <li><strong>Outcomes:</strong>
+          <ul>
+            <li>Preliminary approval &rarr; manual review pending (first 6 months: 100% manual verification).</li>
+            <li>Rejection &rarr; neutral message, no specific reason disclosed, &ldquo;Log out&rdquo; button only.</li>
+          </ul>
+        </li>
+        <li><strong>After approval:</strong> Offer presentation with final loan terms &rarr; SMS contract signature &rarr; disbursement via Kushki.</li>
+      </ul>
+      <div class="callout callout" style="margin-top:8px;">
+        <strong>RED FLAG (from RegForm Summary):</strong> Verification retry option &ldquo;currently not available but is a MUST.&rdquo; Client must be able to retry failed verification without restarting the entire flow.
+      </div>
+    </div>
+
+    <!-- Post-journey -->
+    <div class="step-card" style="border-left-color:#6B7280;">
+      <span class="step-num" style="background:#6B7280;">POST-JOURNEY</span>
+      <div class="step-title">Customer Zone &amp; Loan Extension</div>
+      <p style="font-size:12px;margin-bottom:8px;">After disbursement, the client accesses their Customer Zone.</p>
+      <ul>
+        <li><strong>Active loan overview:</strong> Loan ID, amount, total to pay (on-time + late prices), commissions, disbursed amount, penalty/day, term, due date, countdown.</li>
+        <li><strong>Pay loan</strong> &rarr; Kushki payment interface.</li>
+        <li><strong>Extend loan</strong> &rarr; dropdown (7d / 14d / 30d), dynamic fee + new due date, redirect to Kushki for extension payment.</li>
+        <li><strong>Previous loans history</strong> &mdash; read-only list.</li>
+        <li><strong>Apply for new loan</strong> &mdash; blocked if active loan exists. Slider min 100, max from risk rules, default = max, step 50.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ 8. CUSTOMER FIELDS & VALIDATIONS ═══════════════════════════════════════════════ -->
+  <div class="section" id="s8">
+    <h2 class="section-title">8. Customer Fields &amp; Validations</h2>
+
+    <p style="font-size:12px;color:#6B7280;margin-bottom:16px;">All fields are MVP. 27 client-input fields total (vs. 25 in Nimbura). Name, surname, DOB, gender are obtained via OCR (e-KYC), not client input.</p>
+
+    <h3 class="section-subtitle">Personal identification</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Example</th><th>Validation</th><th>Step</th></tr></thead>
+      <tbody>
+        <tr><td>Personal ID (DNI)</td><td>48372641</td><td>8 digits, any digits, no checksum</td><td>Step 1</td></tr>
+        <tr><td>Email</td><td>tgonzalez@gmail.com</td><td>@ required, &ldquo;.&rdquo; after @</td><td>Homepage</td></tr>
+        <tr><td>Mobile number</td><td>+51 965 728 777</td><td>Starts with 9, 9 digits total, no checksum. OTP validated.</td><td>Homepage</td></tr>
+        <tr><td>OTP</td><td>2365</td><td>4 digits, matched with sent code</td><td>Homepage</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Address</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Department</td><td>Dropdown</td><td>25 departments</td></tr>
+        <tr><td>Province</td><td>Cascading dropdown</td><td>196 provinces (filtered by dept.)</td></tr>
+        <tr><td>District</td><td>Cascading dropdown</td><td>1,837 districts (filtered by prov.)</td></tr>
+        <tr><td>City</td><td>Free text</td><td>Min 3 chars, letters only, special chars: &ntilde;&aacute;&eacute;&iacute;&oacute;&uacute;&uuml;</td></tr>
+        <tr><td>Full address</td><td>Free text</td><td>Min 5 chars, letters + numbers required</td></tr>
+        <tr><td>Duration at address</td><td>Dropdown</td><td>0-6m / 6m-1y / 1-5y / 5-20y / 20y+</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Income &mdash; Employee</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Options / Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Income source</td><td>Radio</td><td>Employee / Self-employed / Other</td></tr>
+        <tr><td>Salary range</td><td>Dropdown</td><td>&lt;S/1,000 | 1,000-1,999 | 2,000-2,999 | 3,000-4,999 | 5,000-7,999 | 8,000+</td></tr>
+        <tr><td>Salary payment date</td><td>Dropdown</td><td>End of month | Biweekly (15th+last) | Weekly (Fri) | Other</td></tr>
+        <tr><td>Employer company name</td><td>Free text</td><td>Min 3 chars, numbers allowed</td></tr>
+        <tr><td>Company phone</td><td>Free text</td><td>+51 auto. Landline Lima: 1+7dig. Other: 2-8+7dig. Mobile: 9+8dig.</td></tr>
+        <tr><td>Sphere of business</td><td>Dropdown</td><td>16 sectors (Agriculture&hellip;Other Services)</td></tr>
+        <tr><td>Job title</td><td>Dropdown</td><td>Manager/Director | Chief/Supervisor | Analyst | Specialist | Assistant | Operator | Salesperson | Consultant | Other</td></tr>
+        <tr><td>Employment period</td><td>Dropdown</td><td>&lt;3m | 3-6m | 6-12m | 1-2y | 2-5y | 5y+</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Income &mdash; Self-employed</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Position / Type of work</td><td>Free text</td><td>Min 3 chars, letters only</td></tr>
+        <tr><td>Monthly net income</td><td>Dropdown</td><td>Same 6 salary ranges</td></tr>
+        <tr><td>Business name</td><td>Free text</td><td>Min 3 chars, digits allowed</td></tr>
+        <tr><td>Sphere of business</td><td>Dropdown</td><td>Same 16 sectors</td></tr>
+        <tr><td>Self-employed period</td><td>Dropdown</td><td>Same 6 period ranges</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Income &mdash; Other</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Options</th></tr></thead>
+      <tbody>
+        <tr><td>Source of income</td><td>Dropdown</td><td>Rentals | Investments | Pension | Remittances | Freelancer | Sale of goods | Other</td></tr>
+        <tr><td>Monthly net income</td><td>Dropdown</td><td>Same 6 ranges</td></tr>
+        <tr><td>Frequency / duration</td><td>Dropdown</td><td>Monthly | Biweekly | Weekly | Occasional | One-time | Other</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Contact person &amp; extended profile</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Phone ownership</td><td>Radio</td><td>In my name | Partner | Parent | Sibling | Employer | Other</td></tr>
+        <tr><td>Contact person name</td><td>Free text</td><td>Min 5 chars, 2 words, no digits</td></tr>
+        <tr><td>Contact person mobile</td><td>Free text</td><td>9 digits, starts with 9. <strong>No OTP.</strong></td></tr>
+        <tr><td>Relationship</td><td>Dropdown</td><td>Father/Mother | Brother/Sister | Partner | Son/Daughter | Uncle/Aunt | Friend | Neighbour | Co-worker | Other</td></tr>
+        <tr><td>Marital status</td><td>Dropdown</td><td>Single | Married | Cohabiting | Divorced | Widowed</td></tr>
+        <tr><td>Education level</td><td>Dropdown</td><td>9 options (No formal&hellip;Completed university)</td></tr>
+        <tr><td>People who depend on you</td><td>Dropdown</td><td>None | 1 | 2 | 3 | 4+</td></tr>
+        <tr><td>Main reason for loan</td><td>Dropdown</td><td>12 options (Repay another loan&hellip;Other)</td></tr>
+        <tr><td>Health insurance</td><td>Dropdown</td><td>None | SIS | EsSalud | EPS | Don&rsquo;t know</td></tr>
+        <tr><td>Mortgage</td><td>Dropdown</td><td>Yes | No | In process</td></tr>
+        <tr><td>Vehicle ownership</td><td>Dropdown</td><td>No | Motorcycle | Car | Both</td></tr>
+        <tr><td>Balance with lenders</td><td>Dropdown</td><td>S/0 | Up to S/500 | S/501-1,500 | S/1,501-3,000 | &gt;S/3,000</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Bank account</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Bank name</td><td>Dropdown</td><td>BCP | Interbank | Scotiabank | BBVA | Pichincha | MiBanco | Other</td></tr>
+        <tr><td>Account type</td><td>Dropdown</td><td>Savings | Checking | Payroll | Other</td></tr>
+        <tr><td>Bank CCI</td><td>Free text</td><td>20 digits, digits only, <strong>checksum validation</strong>. Accepts: xxx-xxx-xxxxxxxxxxxx-xx or plain.</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="section-subtitle">Account &amp; system</h3>
+    <table class="pricing-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Loan amount</td><td>Slider</td><td>S/100 &ndash; S/200 (new), S/100 &ndash; S/1,500 (repeat), step S/10</td></tr>
+        <tr><td>Customer ID</td><td>Auto-generated</td><td>7-digit random unique ID</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+
+</main>
+
+<!-- ════════════════════════════════════════════════════ FOOTER ════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <span>listocredito.pe &middot; MVP Business Requirements &middot; Confidential</span>
+  <span>Generated 2026-05-11 &middot; v2.0</span>
+</footer>
+
+</body>
+</html>
