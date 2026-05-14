@@ -121,6 +121,37 @@ body::after  { right: 0; }
 
 .footer { border-top: 3px solid #D91023; padding: 12px 40px; background: #FFFFFF; display: flex; justify-content: space-between; font-size: 10px; color: #6B7280; margin: 0 12px; }
 
+/* ── API Integration Table ────────────────────────── */
+.int-table td, .int-table thead th { text-align: left !important; }
+.int-table thead th:first-child { text-align: center !important; width: 40px; }
+.int-table td:first-child { text-align: center !important; width: 40px; font-weight: 700 !important; font-size: 12px; }
+.int-table td:nth-child(2) { font-weight: 600 !important; }
+.int-table td:nth-child(4) { text-align: center !important; width: 100px; }
+.int-table td:nth-child(5) { text-align: center !important; width: 100px; }
+.int-table thead th:nth-child(4) { text-align: center !important; }
+.int-table thead th:nth-child(5) { text-align: center !important; }
+
+.int-must td { background: rgba(254,226,226,0.45) !important; }
+.int-must td:first-child { color: #DC2626 !important; }
+.int-must:hover td { background: rgba(254,226,226,0.7) !important; }
+
+.int-should td { background: rgba(219,234,254,0.45) !important; }
+.int-should td:first-child { color: #2563EB !important; }
+.int-should:hover td { background: rgba(219,234,254,0.7) !important; }
+
+.int-could td { background: rgba(237,233,254,0.45) !important; }
+.int-could td:first-child { color: #7C3AED !important; }
+.int-could:hover td { background: rgba(237,233,254,0.7) !important; }
+
+.svc-cell { display: flex; align-items: center; gap: 10px; }
+.svc-ico { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 7px; flex-shrink: 0; }
+.svc-ico svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.svc-note { display: block; font-size: 11px; color: #6B7280; font-weight: 400; font-style: italic; margin-top: 2px; }
+
+.int-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+.int-legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500; }
+.int-legend-swatch { width: 14px; height: 14px; border-radius: 3px; }
+
 @media print {
   body { background: #fff; margin: 0; font-size: 11px; }
   body::before, body::after { display: none; }
@@ -172,6 +203,7 @@ body::after  { right: 0; }
       <a href="#s6"><span class="toc-num">6</span> Calculator &amp; TCEA / TCEM</a>
       <a href="#s7"><span class="toc-num">7</span> Customer Journey (6-Step Flow)</a>
       <a href="#s8"><span class="toc-num">8</span> Customer Fields &amp; Validations</a>
+      <a href="#s9"><span class="toc-num">9</span> API Integrations</a>
     </div>
   </div>
 
@@ -775,6 +807,285 @@ body::after  { right: 0; }
         <tr><td>Customer ID</td><td>Auto-generated</td><td>7-digit random unique ID</td></tr>
       </tbody>
     </table>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════ 9. API INTEGRATIONS ═══════════════════════════════════════════════ -->
+  <div class="section" id="s9">
+    <h2 class="section-title">9. API Integrations</h2>
+
+    <div class="card">
+      <p>All third-party and internal service integrations required for the MVP lending flow, ordered by process phase. Each integration is classified using <strong>MoSCoW</strong> priority.</p>
+    </div>
+
+    <!-- Legend -->
+    <div class="int-legend">
+      <div class="int-legend-item"><div class="int-legend-swatch" style="background:#FCA5A5;"></div> <span class="tag tag-red">MUST</span> &mdash; required for launch</div>
+      <div class="int-legend-item"><div class="int-legend-swatch" style="background:#93C5FD;"></div> <span class="tag tag-blue">SHOULD</span> &mdash; high value, not blocking</div>
+      <div class="int-legend-item"><div class="int-legend-swatch" style="background:#C4B5FD;"></div> <span class="tag tag-purple">COULD</span> &mdash; optional / future</div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="metric-row">
+      <div class="metric-card">
+        <div class="label">Total Integrations</div>
+        <div class="value">12</div>
+        <div class="note">services</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Must</div>
+        <div class="value" style="color:#DC2626;">8</div>
+        <div class="note">required for MVP</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Should</div>
+        <div class="value" style="color:#2563EB;">2</div>
+        <div class="note">high priority</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Could</div>
+        <div class="value" style="color:#7C3AED;">2</div>
+        <div class="note">optional / future</div>
+      </div>
+    </div>
+
+    <!-- Integration table -->
+    <table class="pricing-table int-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Service</th>
+          <th>Description</th>
+          <th>Priority</th>
+          <th>Docs / Links</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- ── ONBOARDING & VERIFICATION ── -->
+        <tr class="row-label-blue"><td colspan="5">Onboarding &amp; Verification</td></tr>
+
+        <tr class="int-must">
+          <td>1</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#3B82F6;">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              Yautalk
+            </div>
+          </td>
+          <td>SMS gateway &mdash; OTP verification, transactional notifications, marketing campaigns</td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-must">
+          <td>2</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#10B981;">
+                <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              </div>
+              Truora
+            </div>
+          </td>
+          <td>
+            eKYC &mdash; ID document scan (DNI), selfie capture, biometric matching, government registry cross-check (RENIEC)
+            <span class="svc-note">Output: structured JSON report &mdash; to be attached as verification artifact</span>
+          </td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-could">
+          <td>3</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#8B5CF6;">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
+              </div>
+              FacesAces
+            </div>
+          </td>
+          <td>
+            eKYC &mdash; same scope as Truora (ID + selfie + registry). Internal / proprietary product
+            <span class="svc-note">Alternative to Truora; evaluate during or after MVP</span>
+          </td>
+          <td><span class="tag tag-purple">COULD</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <!-- ── RISK & FRAUD ASSESSMENT ── -->
+        <tr class="row-label-teal"><td colspan="5">Risk &amp; Fraud Assessment</td></tr>
+
+        <tr class="int-must">
+          <td>4</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#F97316;">
+                <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </div>
+              SEON
+            </div>
+          </td>
+          <td>
+            Device intelligence &amp; Fraud API &mdash; device fingerprinting, browser &amp; IP analysis, proxy/VPN detection, device risk score + fraud rules engine, velocity checks, cross-application pattern analysis, blacklists, device&ndash;identity linking
+            <span class="svc-note">Fraud-API is SEON&rsquo;s most complex endpoint &mdash; multiple API calls, real-time + batch modes</span>
+          </td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-must">
+          <td>5</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#F59E0B;">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              Equifax
+            </div>
+          </td>
+          <td>Credit bureau (Peru / Infocorp) &mdash; consumer credit report, delinquency history, outstanding obligations</td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-must">
+          <td>6</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#06B6D4;">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              RiskSeal
+            </div>
+          </td>
+          <td>Social media intelligence &mdash; digital footprint analysis, social profile verification, velocity data, email/phone reputation</td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <!-- ── DECISIONING ── -->
+        <tr class="row-label-amber"><td colspan="5">Decisioning</td></tr>
+
+        <tr class="int-should">
+          <td>7</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#D91023;">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              </div>
+              Furia
+            </div>
+          </td>
+          <td>
+            Decision engine &mdash; configurable rules, scorecards, strategy trees, A/B testing
+            <span class="svc-note">MVP can rely on the built-in InGain decision engine; Furia integration adds advanced strategy management post-launch</span>
+          </td>
+          <td><span class="tag tag-blue">SHOULD</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <!-- ── SERVICING & OPERATIONS ── -->
+        <tr class="row-label-blue"><td colspan="5">Servicing &amp; Operations</td></tr>
+
+        <tr class="int-must">
+          <td>8</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#6366F1;">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              SendGrid
+            </div>
+          </td>
+          <td>Transactional &amp; marketing email &mdash; loan confirmations, payment reminders, collection notices, marketing campaigns</td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-could">
+          <td>9</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#9CA3AF;">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              </div>
+              Experian
+            </div>
+          </td>
+          <td>
+            Credit bureau &mdash; supplementary credit data, alternative scoring models
+            <span class="svc-note">Future expansion; Equifax covers primary bureau needs at MVP</span>
+          </td>
+          <td><span class="tag tag-purple">COULD</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <!-- ── PAYMENTS & BILLING ── -->
+        <tr class="row-label-teal"><td colspan="5">Payments &amp; Billing</td></tr>
+
+        <tr class="int-must">
+          <td>10</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#14B8A6;">
+                <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+              </div>
+              Monnet
+            </div>
+          </td>
+          <td>Payment provider &mdash; loan disbursement (push to bank), repayment collection, reconciliation</td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-should">
+          <td>11</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#64748B;">
+                <svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/><line x1="9" y1="10" x2="9" y2="10.01"/><line x1="15" y1="10" x2="15" y2="10.01"/><line x1="9" y1="14" x2="9" y2="14.01"/><line x1="15" y1="14" x2="15" y2="14.01"/></svg>
+              </div>
+              BCP / Kushki
+            </div>
+          </td>
+          <td>
+            Payment provider &mdash; alternative/backup payment rails, bank transfers, card processing
+            <span class="svc-note">Implemented last; chosen provider may change based on commercial terms &amp; coverage</span>
+          </td>
+          <td><span class="tag tag-blue">SHOULD</span> <span class="tag tag-purple">COULD</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+        <tr class="int-must">
+          <td>12</td>
+          <td>
+            <div class="svc-cell">
+              <div class="svc-ico" style="background:#8B5CF6;">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+              </div>
+              Nubefact
+            </div>
+          </td>
+          <td>SUNAT e-invoicing &mdash; electronic receipts (boletas), invoices (facturas), regulatory compliance with Peru tax authority</td>
+          <td><span class="tag tag-red">MUST</span></td>
+          <td><span class="tag tag-amber">TBA</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Notes -->
+    <div class="callout-info callout">
+      <strong>Documentation:</strong> Technical docs, API references, and sandbox credentials for each integration will be added as they become available. Column marked <span class="tag tag-amber" style="font-size:9px;">TBA</span> will link to the provider&rsquo;s developer portal and internal integration specs.
+    </div>
+
+    <div class="callout-warning callout">
+      <strong>Implementation order:</strong> Integrations are listed in process-flow sequence (onboarding &rarr; risk &rarr; decision &rarr; servicing &rarr; payments). Payment providers (Monnet, BCP/Kushki) are implemented last due to potential provider changes during the procurement phase.
+    </div>
   </div>
 
 
